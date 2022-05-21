@@ -1,0 +1,192 @@
+/*-----Badges-----*/
+
+.btn .badge {
+	position: relative;
+	top: -1px;
+}
+.badge-primary {
+	color: $white;
+	background-color: $primary;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: #24987E;
+		}
+	}
+}
+.badge-secondary {
+	color: $white;
+	background-color: $secondary;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: $secondary;
+		}
+	}
+}
+.badge-success {
+	color: $white;
+	background-color: $success;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: #15ca7c;
+		}
+	}
+}
+.badge-info {
+	color: $white;
+	background-color: $info;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: #1594ef;
+		}
+	}
+}
+.badge-warning {
+	color: $white;
+	background-color: $warning;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: #c29d0b;
+		}
+	}
+}
+.badge-danger {
+	color: $white;
+	background-color: #dc0441;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: #a11918;
+		}
+	}
+}
+.badge-light {
+	color: #5b6084;
+	background-color: #e8ebf2;
+	&[href] {
+		&:hover, &:focus {
+			color: #5b6084;
+			background-color: #e8ebf2;
+			text-decoration: none;
+		}
+	}
+}
+.badge-dark {
+	color: $white;
+	background-color: $dark;
+	&[href] {
+		&:hover, &:focus {
+			color: $white;
+			text-decoration: none;
+			background-color: #1d2124;
+		}
+	}
+}
+.badge {
+	display: inline-block;
+	padding: 5px 10px;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.2;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: 7px;
+}
+.badge-pill {
+	padding-right: 1.2em;
+	padding-left: 1.2em;
+	border-radius: 10rem;
+}
+.badgetext {
+	float: right;
+}
+.badge-default {
+	background: rgb(84, 87, 95);
+	color: $white;
+}
+.shape {
+	border-style: solid;
+	border-width: 0 70px 40px 0;
+	float: right;
+	height: 0px;
+	width: 0px;
+	-ms-transform: rotate(360deg);
+	/* IE 9 */
+	-o-transform: rotate(360deg);
+	/* Opera 10.5 */
+	-webkit-transform: rotate(360deg);
+	/* Safari and Chrome */
+	transform: rotate(360deg);
+}
+.offer {
+	background: $white;
+	border: 1px solid #ddd;
+	margin: 15px 0;
+	overflow: hidden;
+}
+.shape {
+	border-color: rgba(255, 255, 255, 0) #d9534f rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+}
+.offer-danger {
+	border-color: #dc0441;
+	.shape {
+		border-color: transparent #dc0441 transparent transparent;
+	}
+}
+.offer-success {
+	border-color: $success;
+	.shape {
+		border-color: transparent $success transparent transparent;
+	}
+}
+.offer-default {
+	border-color: #6b6f80;
+	.shape {
+		border-color: transparent #6b6f80 transparent transparent;
+	}
+}
+.offer-primary {
+	border-color: $primary;
+	.shape {
+		border-color: transparent $primary transparent transparent;
+	}
+}
+.offer-info {
+	border-color: $info;
+	.shape {
+		border-color: transparent $info transparent transparent;
+	}
+}
+.offer-warning {
+	border-color: $warning;
+	.shape {
+		border-color: transparent $warning transparent transparent;
+	}
+}
+.shape-text {
+	color: $white;
+	font-size: 12px;
+	font-weight: bold;
+	position: relative;
+	right: -47px;
+	top: 0px;
+	white-space: nowrap;
+	-ms-transform: rotate(30deg);
+	-o-transform: rotate(360deg);
+	-webkit-transform: rotate(30deg);
+	transform: rotate(30deg);
+}
+.offer-content {
+	padding: 20px;
+}

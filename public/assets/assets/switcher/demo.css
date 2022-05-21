@@ -1,0 +1,372 @@
+/* Color Swicher CSS */
+
+.switcher {
+    width: 30px !important;
+    height: 40px !important;
+    display: inline-block;
+    margin: 4px 8px;
+    border-radius: 5px;
+    border: 0px solid #000;
+}
+.swichermainleft {
+  width: 100%;
+  float: left;
+}
+.wscolorcode {
+    display: inline-block;
+    margin: 3px;
+}
+.skin-body{
+	margin: 0.8rem 0 0.8rem 0;
+}
+.navstyle1{
+	border: 1px solid #e3e3f7;
+    padding: 0.2rem 1rem 0.2rem;
+}
+.navstyle1:hover{
+	color:#031938;
+	cursor: pointer;
+}
+.wscolorcode1 {
+    display: inline-block;
+    margin: 4px 5px;
+    width: 30px;
+    height: 30px;
+	border-radius: 5px;
+}
+.skin-body a{
+	font-size:0.9rem;
+	font-weight:500;
+}
+.full-width .container{  
+    max-width:inherit !important;
+	width:95% !important;	
+	transition:all 0.5s ease;
+}
+.switch_section span {
+    color: #212121 !important;
+    font-size: 14px;
+	font-weight: 400;
+}
+.unbox {  
+   margin:0; 
+}
+
+.switch_section li{
+    width:100%;
+    height:30px;
+}
+.switch_section {
+    width: 100%;
+    height: auto;
+    list-style: none;
+    margin: 0 auto;
+    margin: 0.8rem 0 0.8rem 0;
+}
+.switch-toggle{
+	margin: 4px 5px;
+	padding: 0 5px 0 5px;
+}
+
+/* //////////////////  switch-1  //////////////// */
+.onoffswitch {
+    position: relative;
+    width: 30px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 15px;
+    padding: 0;
+    line-height: 16px;
+    border: 1px solid  #c9d5ec;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+    content: "";
+	height: 16px;
+    display: block;
+	width: 17px; 
+	margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 13px;
+    border: 1px solid  #c9d5ec; border-radius: 15px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px; 
+}
+
+/* //////////////////  switch-2  //////////////// */
+.onoffswitch2 {
+    position: relative;
+    width: 30px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    
+}
+.onoffswitch2-checkbox {
+    display: none;
+}
+.onoffswitch2-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 15px;
+    padding: 0;
+    line-height: 16px;
+    border: 1px solid  #c9d5ec;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch2-label:before {
+    content: "";
+	height: 16px;
+    display: block;
+	width: 17px; 
+	margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 13px;
+    border: 1px solid  #c9d5ec; border-radius: 15px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch2-checkbox:checked + .onoffswitch2-label:before {
+    right: 0px; 
+}
+
+/* //////////////////  switch-3  //////////////// */
+.onoffswitch3 {
+    position: relative;
+    width: 30px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select: none;
+    
+}
+.onoffswitch3-checkbox {
+    display: none;
+}
+.onoffswitch3-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 15px;
+    padding: 0;
+    line-height: 16px;
+    border: 1px solid  #c9d5ec;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch3-label:before {
+    content: "";
+	height: 16px;
+    display: block;
+	width: 17px; 
+	margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 13px;
+    border: 1px solid  #c9d5ec; border-radius: 15px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch3-checkbox:checked + .onoffswitch3-label {
+    background-color:#0052cc;
+}
+.onoffswitch3-checkbox:checked + .onoffswitch-label3, .onoffswitch3-checkbox:checked + .onoffswitch3-label:before {
+   border-color:#0052cc;
+}
+.onoffswitch3-checkbox:checked + .onoffswitch3-label:before {
+    right: 0px; 
+}
+
+/*-- color-1 --*/
+.color1{
+	background: #5e2dd8 !important;
+}
+
+/*-- color-2 --*/
+.color2{
+	background: #d52b46  !important;
+}
+
+/*-- color-3 --*/
+.color3{
+	background: #569834 !important;
+}
+
+/*-- color-4 --*/
+.color4{
+	background:#4453fb !important;
+}
+
+/*-- color-5 --*/
+.color5{
+	background:#f3532f   !important;
+}
+
+/*-- color-6 --*/
+.color6{
+	background: #433a8a !important;
+}
+
+/*-- color-7 --*/
+.color7{
+	background: #8a3a4c !important;
+}
+
+/*-- color-8 --*/
+.color8{
+	background:#8a4c3a  !important;
+}
+
+/*-- color-9 --*/
+.color9{
+	background:#246398  !important;
+}
+
+/*-- color-10 --*/
+.color10{
+	background: #23715c !important;
+}
+
+/*-- color-11 --*/
+.color11{
+	background: linear-gradient(to top, #0250c5 0%, #d43f8d 100%) !important;
+}
+
+/*-- color-12 --*/
+.color12{
+	background: linear-gradient(135deg, #504b9f 10%, #3b8dbf 100%) !important;
+}
+
+/*-- color-13 --*/
+.color13{
+	background: linear-gradient( 135deg, #7368de 10%, #c15fba 100%) !important;
+}
+
+/*-- color-14 --*/
+.color14{
+	background: linear-gradient( 135deg, #7e38c4 10%, #2b246d  100%) !important;
+}
+
+/*-- color-15 --*/
+.color15{
+	background:linear-gradient( 135deg, #ce474d 10%, #571350 100%)  !important;
+}
+
+/*-- color-16 --*/
+.color16{
+	background:linear-gradient(135deg, #8888df 10%, #5278db 100%) !important;
+}
+
+/*-- color-17 --*/
+.color17{
+	background: linear-gradient(135deg, #2c77ec 10%, #169b6a 100%)  !important;
+}
+
+/*-- color-18 --*/
+.color18{
+	background: linear-gradient(135deg, #58c58f 10%, #40a2df 100%) !important;
+}
+
+/*-- color-19 --*/
+.color19{
+	background: linear-gradient(135deg, #238ec3 10%, #903ba3 100%) !important;
+}
+
+/*-- color-20 --*/
+.color20{
+	background: linear-gradient(135deg, #4d36a1 10%, #6c2899 100%) !important;
+}
+/*skins */
+.switcher-pills label{
+	margin-bottom:0;
+}
+.switcher-pills .selectgroup-button{
+	border-radius:3px !important;
+	padding:0.1rem 1rem 0.1rem  !important;
+	font-size:0.7rem !important;
+	color:#031938 !important;
+}
+.leftmenu-style2 .leftmenu1, .leftmenu-style2 .header.app-header {
+	display:none;
+}
+.sidenav-toggled .leftmenu2{
+	display:none;
+}
+.app.leftmenu-style2 .leftmenu2, .app.leftmenu-style2 .leftmenu2 .header.app-header2, .app.leftmenu-style2 .leftmenu2 .app-sidebar2{
+	display:block;
+}
+.leftmenu-style2 .container-fluid.main-content{
+	padding-right:0;
+	padding-left:0;
+	width:auto;
+}
+.leftmenu-style2 .main-content{
+	padding-top:0;
+}
+@media (min-width: 767px){
+	.leftmenu-style2.app.sidebar-mini .app-content {
+		margin-left: 0;
+	}
+	.leftmenu-style2 .app-content2 {
+		padding: 28px 30px 0 30px !important;
+	}
+}
+
+.switch_bg-img{
+	background: url(../images/media/bg.jpg)!important;
+	padding:0.75rem 1.5rem 0.75rem 1.5rem;
+	position:relative;
+}
+.switch_bg-img:before {
+    content: '';
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+	right: 0;
+    left: 0;
+    top: 0;
+}
+.switch_bg-img span{
+	font-size: 14px;
+    font-weight: 500;
+	color:#fff;
+    z-index: 1;
+}
+.dark-theme .demo-icon.bg_dark {
+    background: #ffffff;
+    color: #16182f;
+}
+.dark-theme .demo_changer i {
+	color: #16182f;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #4c84ff;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color:#4c84ff;
+}
+.onoffswitch2-checkbox:checked + .onoffswitch2-label {
+    background-color:#4c84ff;
+}
+.onoffswitch2-checkbox:checked + .onoffswitch-label2, .onoffswitch2-checkbox:checked + .onoffswitch2-label:before {
+   border-color:##4c84ff;
+}

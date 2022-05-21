@@ -1,0 +1,72 @@
+<?php
+namespace App\Http\Controllers\Demo;
+
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Space\Demo\Todo;
+
+class TodosController extends Controller
+{
+    /**
+     * Todos Index
+     *
+     * @return View
+     */
+    public function index()
+    {
+        return  $todos = Todo::all();
+    }
+
+    /**
+     * Save Todo
+     *
+     * @param Requests\TodosRequest $request
+     * @return View
+     */
+    public function store(Requests\TodosRequest $request)
+    {
+        $todo = new Todo();
+        $todo->title = $request->title;
+        $todo->completed = $request->completed;
+        $todo->save();
+        return response()->json([
+            'message' => 'Todo Added Successfully',
+            'todo' => $todo
+        ],200);
+    }
+
+    /**
+     * Toggle the Todo
+     *
+     * @param $id
+     * @param Request $request
+     * @return View
+     */
+    public function toggleTodo($id,Request $request)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->completed = $request->completed;
+        $todo->save();
+        return response()->json([
+            'message' => 'Todo Marked as Complete',
+        ],200);
+    }
+
+    /**
+     * Delete Todo
+     *
+     * @param $id
+     * @return View
+     */
+    public function destroy($id)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+        return response()->json([
+            'message' => 'Todo Deleted Successfully',
+
+        ],200);
+    }
+}

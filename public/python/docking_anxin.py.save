@@ -1,0 +1,214 @@
+# -*- coding: utf-8 -*-
+# pip install selenium==2.48.0
+import ddddocr
+import sys
+import io
+from PIL import Image
+from selenium import webdriver
+import time
+
+# from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+import requests
+import json
+import datetime
+
+
+def identify_captcha(pic):
+    ocr = ddddocr.DdddOcr()
+    with open(pic, "rb") as f:
+        img_bytes = f.read()
+    res = ocr.classification(img_bytes)
+    return res
+
+
+def save_capthca(left, top, right, bottom, captcha_pic="captcha.png"):
+    im = Image.open(r"login_page.png")
+    im = im.crop((left, top, right, bottom))
+    im.save(captcha_pic)
+
+
+def simulate_login(url, username, password):
+    page_source = "验证码错误"
+    is_login = False
+    while is_login == False:
+        # driver = webdriver.PhantomJS('./phantomjs-2.1.1-windows/bin/phantomjs.exe')
+        # driver = webdriver.Chrome('./chromedriver.exe')
+        # 创建一个参数对象，用来控制chrome以无界面模式打开
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--disable-gpu")
+        # 创建浏览器对象
+        driver = webdriver.Chrome(chrome_options=chrome_options)
+        # driver = webdriver.Chrome()  # 不加 chrome_options 参数就是正常的打开一个浏览器，进行操作
+        driver.implicitly_wait(10)
+        # 访问登录页面
+        driver.get(url)
+        # print("验证码错误")
+        driver.save_screenshot("login_page.png")
+        # username
+        username_element = driver.find_element_by_xpath(
+            """//*[@id="app"]/div/div/div/div/form/div[1]/div/div/input"""
+        )
+        username_element.clear()
+        username_element.send_keys(username)
+        # password
+        password_element = driver.find_element_by_xpath(
+            """//*[@id="app"]/div/div/div/div/form/div[2]/div/div/input"""
+        )
+        password_element.clear()
+        password_element.send_keys(password)
+        captcha_element = driver.find_element_by_xpath(
+            """//*[@id="app"]/div/div/div/div/form/div[3]/div/div/div[2]/img"""
+        )
+        left = captcha_element.location["x"]
+        top = captcha_element.location["y"]
+        right = captcha_element.location["x"] + captcha_element.size["width"]
+        bottom = captcha_element.location["y"] + captcha_element.size["height"]
+        save_capthca(left, top, right, bottom)
+        pic = "captcha.png"
+        captcha_code = identify_captcha(pic)
+        captcha_element = driver.find_element_by_xpath(
+            """//*[@id="app"]/div/div/div/div/form/div[3]/div/div/div[1]/div/input"""
+        )
+        captcha_element.send_keys(captcha_code)
+        # 点击登录
+        login = driver.find_element_by_xpath(
+            """//*[@id="app"]/div/div/div/div/form/div[5]/div/button"""
+        )
+        login.click()
+        time.sleep(3)
+        page_source = driver.page_source
+        if ("验证码错误" in page_source) or ("欢迎登录安信工作证管理平台" not in page_source):
+            print("Wrong captcha")
+            is_login = False
+            cookies = "Fail Wait"
+        else:
+            print("Right captcha")
+            is_login = True
+            # print(page_source)
+            cookies = driver.get_cookies()
+            cookies_dict = {
+                cookie["name"]: cookie["value"] for cookie in driver.get_cookies()
+            }
+        driver.quit()
+    # print("success login_page")
+    # print(cookies_dict)
+    return cookies_dict
+
+
+def add_anxin_permit(cookies, users_xlsx_filename, anxin_permit_result_filename):
+    session = requests.Session()
+    paramsPost = {"modelId": "214"}
+    paramsMultipart = [
+        (
+            "file",
+            (
+                users_xlsx_filename,
+                open(users_xlsx_filename, "rb"),
+                "application/octet-stream",
+            ),
+        )
+    ]
+    headers = {
+        "Origin": "https://workcardmgr.easyctid.cn",
+        "Sec-Ch-Ua": '" Not A;Brand";v="99", "Chromium";v="100", "Google Chrome";v="100"',
+        "Accept": "*/*",
+        "Sec-Ch-Ua-Platform": '"Windows"',
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+        "Referer": "https://workcardmgr.easyctid.cn/",
+        "Connection": "close",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-Dest": "empty",
+        "Accept-Encoding": "gzip, deflate",
+        "Sec-Fetch-Mode": "cors",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,ko;q=0.7",
+        "Sec-Ch-Ua-Mobile": "?0",
+    }
+    response = session.post(
+        "https://workcardmgr.easyctid.cn/ctid/card/manage/app/card/readExcel",
+        data=paramsPost,
+        files=paramsMultipart,
+        headers=headers,
+        cookies=cookies,
+    )
+    print("add_anxin_permit Status code:   %i" % response.status_code)
+    print("download_anxin_permit_result Response body: %s" % response.content)
+    downloadId = json.loads(response.content)["data"]["downloadId"]
+    # print(downloadId)
+    download_anxin_permit_result(cookies, downloadId, anxin_permit_result_filename)
+
+
+def download_anxin_permit_result(cookies, downloadId, anxin_permit_result_filename):
+    session = requests.Session()
+    rawBody = '{"downloadId":"%s"}' % (downloadId)
+    headers = {
+        "Origin": "https://workcardmgr.easyctid.cn",
+        "Sec-Ch-Ua": '" Not A;Brand";v="99", "Chromium";v="100", "Google Chrome";v="100"',
+        "Accept": "application/json, text/plain, */*",
+        "Sec-Ch-Ua-Platform": '"Windows"',
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+        "Referer": "https://workcardmgr.easyctid.cn/",
+        "Connection": "close",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-Dest": "empty",
+        "Accept-Encoding": "gzip, deflate",
+        "Sec-Fetch-Mode": "cors",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,ko;q=0.7",
+        "Sec-Ch-Ua-Mobile": "?0",
+        "Content-Type": "application/json",
+    }
+    response = session.post(
+        "https://workcardmgr.easyctid.cn/ctid/card/manage/app/download/excel/fail",
+        data=rawBody,
+        headers=headers,
+        cookies=cookies,
+    )
+    print("download_anxin_permit_result Status code:   %i" % response.status_code)
+    with open(anxin_permit_result_filename, "wb") as f:
+        f.write(response.content)
+
+
+def download_health_status(cookies, health_status_filename):
+    session = requests.Session()
+    paramsPost = """{}"""
+    headers = {
+        "Origin": "https://workcardmgr.easyctid.cn",
+        "Sec-Ch-Ua": '" Not A;Brand";v="99", "Chromium";v="100", "Google Chrome";v="100"',
+        "Accept": "application/json, text/plain, */*",
+        "Sec-Ch-Ua-Platform": '"Windows"',
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36",
+        "Referer": "https://workcardmgr.easyctid.cn/",
+        "Connection": "close",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-Dest": "empty",
+        "Accept-Encoding": "gzip, deflate",
+        "Sec-Fetch-Mode": "cors",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,ko;q=0.7",
+        "Sec-Ch-Ua-Mobile": "?0",
+        "Content-Type": "application/json",
+    }
+    response = session.post(
+        "https://workcardmgr.easyctid.cn/ctid/card/manage/app/health/export",
+        data=paramsPost,
+        headers=headers,
+        cookies=cookies,
+    )
+    print("download_health_status Status code:   %i" % response.status_code)
+    with open(health_status_filename, "wb") as f:
+        f.write(response.content)
+
+
+if __name__ == "__main__":
+    url = r"https://workcardmgr.easyctid.cn/#/login"
+    username = "bjwjxhkj"
+    password = "Bjwjxhkj@666"
+    cookies = simulate_login(url, username, password)
+    users_xlsx_filename = "template.xlsx"
+    anxin_permit_result_filename = "anxin_permit_result.xlsx"
+    add_anxin_permit(cookies, users_xlsx_filename, anxin_permit_result_filename)
+    # date = str(datetime.date.today())
+    # health_status_filename = 'health_status%s.xlsx'%date
+    health_status_filename = "health_status.xlsx"
+    download_health_status(cookies, health_status_filename)
